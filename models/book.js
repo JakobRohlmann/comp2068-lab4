@@ -1,5 +1,16 @@
 const mongoose = require( 'mongoose' )
 
+const SpecificationSchema = new mongoose.Schema({
+  key: {
+    type: String,
+    required: 'You must have a key.'
+  },
+  value: {
+    type: String,
+    required: 'You must have a value.'
+  }
+})
+
 const BookSchema = new mongoose.Schema({
   title: {
     type: String,

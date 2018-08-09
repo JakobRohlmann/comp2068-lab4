@@ -1,13 +1,20 @@
-var express = require('express')
-var router = express.Router()
+var express = require('express');
+var router = express.Router();
 
-// create a link to our drink model
-var booksController = require('../controllers/booksController')
+var booksController = require('../controllers/booksController');
 
-router.get( '/', booksController.index )
+router.get( '/', booksController.index );
 
-router.get( '/new', booksController.new )
+router.get( '/new', booksController.new );
 
-router.post( '/', booksController.create )
+router.get( '/:id', booksController.show );
+
+router.get( '/:id/edit', booksController.edit );
+
+router.post( '/', booksController.create );
+
+router.post( '/:id', booksController.update );
+
+router.post( '/:id/delete', booksController.delete );
 
 module.exports = router;

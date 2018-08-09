@@ -1,0 +1,85 @@
+<% include ../partials/header %>
+
+<section>
+  <form action="/books/<%= book.id %>" method="post">
+    <fieldset>
+      <legend>Book Information</legend>
+
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" id="title" name="title" placeholder="Harry Potter" required value="<%= book.title %>">
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" class="form-control" id="description" name="description" placeholder="U wot m8?" required value="<%= book.description %>">
+      </div>
+
+      <div class="form-group">
+        <label for="author">Author</label>
+        <input type="text" class="form-control" id="author" name="author" placeholder="J.K. Rowling" required value="<%= book.author %>">
+      </div>
+
+      <div class="form-group">
+        <label for="price">Price</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">$</div>
+          </div>
+
+          <input type="number" class="form-control" id="price" name="price" placeholder="4.99" step="0.01" min="0" required value="<%= book.price %>">
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Specifications</legend>
+
+      <div id="book_specifications">
+        <div class="form-group">
+          <button type="button" class="btn btn-success btn-sm" onclick="addSpecForm()">Add Specification</button>
+        </div>
+
+        <% if ( book.specifications && book.specifications.length > 0 ) {%>
+          <% for ( let spec of book.specifications ) { %>
+            <div class="specification">
+              <button type="button" class="remove btn btn-danger btn-small" onclick="return delSpecForm(event)">&times;</button>
+
+              <div class="form-group mr-4">
+                <label for="specification[key]" class="mr-1">Key</label>
+                <input type="text" class="form-control" id="book_specification_key" name="specification[key]" placeholder="colour" value="<%= spec.key %>">
+              </div>
+
+              <div class="form-group">
+                <label for="specification[value]" class="mr-1">Value</label>
+                <input type="text" class="form-control" id="book_specification_value" name="specification[value]" placeholder="red" value="<%= spec.value %>">
+              </div>
+            </div>
+          <% } %>
+        <% } %>
+
+        <template id="book_specification" class="form-inline mb-4">
+          <div class="specification">
+            <button type="button" class="remove btn btn-danger btn-small" onclick="return delSpecForm(event)">&times;</button>
+
+            <div class="form-group mr-4">
+              <label for="specification[key]" class="mr-1">Key</label>
+              <input type="text" class="form-control" id="book_specification_key" name="specification[key]" placeholder="colour">
+            </div>
+
+            <div class="form-group">
+              <label for="specification[value]" class="mr-1">Value</label>
+              <input type="text" class="form-control" id="book_specification_value" name="specification[value]" placeholder="red">
+            </div>
+          </div>
+        </template>
+      </div>
+    </fieldset>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Update Book</button>
+    </div>
+  </form>
+</section>
+
+<% include ../partials/footer %>
